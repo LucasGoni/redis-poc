@@ -1,5 +1,4 @@
-# REDIS WORKSHOP DOCUMENTATION
-
+Hello, everyone. Here you will find a description of the application, instructions on how to install Redis and connect to a server, and major features of this incredible tool.
 ## Use Case
 
 **redis-poc** is a full-stack application built with Node.js, Express, TypeScript, Vue.js, and Redis as a cache database. It utilizes [NewsAPI](https://newsapi.org/) to create a real-time news search app that fetches live articles from various websites. The primary goal is to demonstrate the advantages of using Redis in your application to store frequently accessed data, thereby increasing speed for faster responses. When a client makes a request, the backend searches for articles matching the user's criteria. If the article is stored in Redis, it's retrieved from the cache, enhancing performance. If no articles match the search criteria, the information is fetched from the News API.
@@ -55,10 +54,6 @@ const client = createClient();
 client.on('error', err => console.log('Redis Client Error', err)); 
 await client.connect(); 
 ```
-
-## Test
-
-- Perform tests to ensure proper functionality.
 
 ## Environment Variables
 
