@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import axios from 'axios';
-import {redisClient} from '../config/redisClient';
+import { redisClient } from '../config/redisClient';
 
 const router = express.Router();
 
@@ -19,7 +19,9 @@ router.get('/', async (req: Request, res: Response) => {
 
     if (cachedNews) {
       console.log(`Cache hit for query "${cacheKey}".`);
-      return res.json({ source: 'cache', data: JSON.parse(cachedNews) });
+      const response = JSON.parse(cachedNews);
+      res.json({ source: 'redis', data: response }); // Send source: 'cache' along with the response
+      return;
     }
 
     console.log(`Cache miss for query "${cacheKey}". Fetching from API.`);
@@ -32,7 +34,7 @@ router.get('/', async (req: Request, res: Response) => {
     await redisClient.setEx(cacheKey, 3600, JSON.stringify(news)); // Cache for 1 hour
     console.timeEnd(`redis-set:${cacheKey}`);
 
-    res.json({ source: 'api', data: news });
+    res.json({ source: 'api', data: news }); // Send source: 'api' along with the response
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch news' });

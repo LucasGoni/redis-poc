@@ -5,7 +5,7 @@
     <p>{{ article.description }}</p>
     <p>{{ article.content }}</p>
     <a :href="article.url" target="_blank">Read more</a>
-    <button @click="goBack">Go Back</button> <!-- New button to go back -->
+    <button class="button-go-back" @click="goBack">Go Back</button> <!-- New button to go back -->
   </div>
   <div v-else>
     <p>No article details available</p>
@@ -39,3 +39,7 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+@import '../assets/css/ArticleDetail.css';
+</style>
