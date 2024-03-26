@@ -59,9 +59,7 @@ await client.connect();
 
 All sensitive information, such as the API key or backend URL, should be stored in environment variables.
 
-## Why Redis?
-
-# Why Redis?
+## Redis features
 
 Redis is more than just a cache; it's a powerful in-memory data store with a rich feature set that makes it an excellent choice for various use cases:
 
@@ -96,12 +94,6 @@ Redis is more than just a cache; it's a powerful in-memory data store with a ric
 ## Real-time Capabilities:
 - **Pub/Sub Messaging:** Redis's pub/sub messaging system enables real-time communication between clients and servers, making it suitable for building real-time applications and messaging systems.
 - **Redis Streams:** Redis Streams allows developers to build complex stream processing applications with features like consumer groups, making it ideal for event-driven architectures and real-time analytics.
-
-## Simple to Use:
-- **Simplicity:** Redis's simple protocol and feature set make it easy to get started, while its powerful capabilities cater to complex use cases.
-- **Operational Ease:** Redis's design keeps operational complexity low, making it easy to maintain and manage even in large-scale deployments.
-
-Redis's combination of performance, flexibility, scalability, persistence, high availability, rich ecosystem, real-time capabilities, and ease of use makes it a preferred choice for implementing caching, messaging, real-time analytics, and various other use cases in modern applications.
 
 ## Redis Memory Footprint
 
