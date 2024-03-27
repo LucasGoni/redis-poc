@@ -1,41 +1,34 @@
-/* ArticleDetail.css */
-.article-detail {
-    padding: 20px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-  }
-  
-  .article-detail h1 {
-    color: #0a4a80;
-  }
-  
-  .article-detail img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-  .article-detail a {
-    color: #0a4a80;
-    text-decoration: none;
-  }
-  
-  .article-detail a:hover {
-    text-decoration: underline;
-  }
-  
-  .button-go-back {
-    margin-top: 20px;
-    background-color: #0a4a80;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .button-go-back:hover {
-    background-color: #055b98;
-  }
-  
+.article-detail a,
+.button-go-back {
+  display: block; /* Makes the element fill the available line width */
+  margin-top: 10px; /* Adds space above the element */
+}
+
+.button-go-back {
+  position: fixed; /* Ensure the button remains fixed on the page */
+  bottom: 3px; /* Adjust as needed */
+  left: 3px; /* Adjust as needed */
+  background-color: #0a4a80;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center; /* Center the text inside the button */
+  z-index: 9999;
+}
+
+
+
+.button-go-back:hover {
+  background-color: #055b98;
+}
+
+/* Additional styles for the article-detail class and its children */
+.article-detail img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  display: block; /* Makes the image block-level */
+  margin: 10px auto; /* Centers the image and adds space around it */
+}
