@@ -1,10 +1,11 @@
+/* NewsSearch.css */
 .search-fields {
-  display: flex;
-  flex-wrap: wrap;
+  display: flex; 
+  flex-wrap: wrap; 
   gap: 10px;
+  justify-content: center;
   margin-bottom: 20px;
-  justify-content: center; /* Centers the fields horizontally */
-} 
+}
 
 .button-search {
   background-color: #0a4a80;
@@ -20,23 +21,14 @@
   background-color: #055b98;
 }
 
-.input-field,
-.select-field {
-  padding: 10px;
-  border: 2px solid #0a4a80;
-  border-radius: 5px;
-  margin: 5px;
-}
-
-.input-field::placeholder {
-  color: #0a4a80;
-}
-
 .performance-metrics {
-  background-color: #f1f1f1;
+  background-color: #d4c9c98d;
   border-left: 5px solid #0a4a80;
   padding: 10px;
-  margin-bottom: 20px;
+  margin: 20px auto;
+  max-width: 300px; /* Constrain the width of the performance metrics */
+  width: 100%; /* Make it responsive */
+  box-sizing: border-box; /* Include padding in the width calculation */
 }
 
 .news-article {
@@ -44,11 +36,12 @@
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 5px;
-  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  transition: transform 0.3s ease;
+  background-color: #d4c9c98d;
 }
 
 .news-article:hover {
-  transform: translateY(-5px); /* 'Lift' effect on hover */
+  transform: translateY(-5px);
 }
 
 .news-article h2 {
@@ -59,19 +52,9 @@
   color: #333;
 }
 
-.search-fields {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-  justify-content: center; /* Centers the fields horizontally */
-}
-
 .news-search {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
-

@@ -15,7 +15,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { Article } from '../interface/Article';
-import { useRouter } from 'vue-router'; // Import useRouter from vue-router
+import { useRouter, Router } from 'vue-router'; // Import useRouter from vue-router
 
 export default defineComponent({
   name: 'ArticleDetail',
@@ -26,10 +26,10 @@ export default defineComponent({
     }
   },
   setup() {
-    const router = useRouter(); // Get router instance
+    const router: Router = useRouter(); // Get router instance
 
     // Function to go back to the previous page
-    const goBack = () => {
+    const goBack = (): void => {
       router.go(-1); // Go back to the previous page in the history
     };
 
