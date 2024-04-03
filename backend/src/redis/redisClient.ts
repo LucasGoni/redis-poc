@@ -1,25 +1,35 @@
-import { createClient } from 'redis';
+import { createClient, RedisClientType } from 'redis';
 
-const redisUrl = process.env.REDIS_URL;
-const redisClient = createClient({
+const redisUrl: string = process.env.REDIS_URL || '';
+const redisClient: RedisClientType = createClient({ 
   url: redisUrl,
-});
+ });
+ let isConnectedToRedis: boolean = false;
 
-redisClient.on('error', (err) => console.log('Redis Client Error', err));
-redisClient.on('connect', () => console.log('Connected to Redis'));
-redisClient.on('reconnecting', () => console.log('Reconnecting to Redis...'));
-redisClient.on('end', () => console.log('Disconnected from Redis'));
-
-async function connectRedis() {
+ async function connectRedis() {
   try {
     await redisClient.connect();
   } catch (err) {
     console.error('Failed to connect to Redis:', err);
-    // TODO: Implement error handling or retry logic 
   }
 }
 
-connectRedis();
+redisClient.on('error', (err: Error) => {
+  console.error('Test error:', err);
+  if (!isConnectedToRedis) {
+    setTimeout(connectRedis, 300000); // 5 minutes
+  }
+});
+
+redisClient.on('connect', () => {
+  isConnectedToRedis = true;
+  console.log('Connected to Redis');
+});
+
+redisClient.on('end', () => {
+  isConnectedToRedis = false;
+  console.log('Disconnected from Redis');
+});
 
 // Graceful shutdown
 process.on('SIGINT', async () => {
@@ -28,10 +38,6 @@ process.on('SIGINT', async () => {
   process.exit(0);
 });
 
-export { redisClient };
+connectRedis();
 
-
-
-
-
-
+export { redisClient, isConnectedToRedis };
