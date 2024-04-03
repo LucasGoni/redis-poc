@@ -26,7 +26,11 @@
     <button class="button-search" @click="fetchNews">Search</button>
 
     <div v-if="loading">Loading...</div>
-    <div v-if="errorMessage">{{ errorMessage }}</div>
+    <div v-if="errors.length > 0">
+      <ul>
+        <li v-for="error in errors" :key="error">{{ error }}</li>
+      </ul>
+    </div>
 
     <div v-for="article in articles" :key="article.url" class="news-article">
       <router-link :to="{ name: 'ArticleDetail', params: { articleData: encodeURIComponent(JSON.stringify(article)) }}" @click="navigateToArticleDetail(article)">
@@ -43,6 +47,7 @@ import { defineComponent, reactive, ref } from 'vue';
 import { Article } from '../interface/Article';
 import { SearchParams } from '../interface/SearchParams';
 import { ResponseInfo } from '../interface/ResponseInfo';
+import { validateSearchParams, ValidationResult } from '../utils/validateSearchParams';
 import router from '../router/router';
 
 export default defineComponent({
@@ -58,15 +63,21 @@ export default defineComponent({
       country: '',
     });
 
-
     const articles = ref<Article[]>([]);
     const loading = ref<boolean>(false);
-    const errorMessage = ref<string>('');
+    const errors = ref<string[]>([]);
     const responseInfo = ref<ResponseInfo | null>(null);
 
     async function fetchNews(): Promise<void> {
       loading.value = true;
-      errorMessage.value = '';
+      errors.value = [];
+
+      let validationResult: ValidationResult | null = validateSearchParams(searchParams);
+      if (validationResult && validationResult.errors.length > 0) {
+        errors.value = validationResult.errors;
+        loading.value = false;
+        return;
+      }
 
       try {
         const response: AxiosResponse = await axios.get(`${process.env.VUE_APP_SERVER_URL}`, {
@@ -80,11 +91,10 @@ export default defineComponent({
         };
         
         articles.value = responseInfo.value.data.articles || [];
-
         console.log(responseInfo.value.responseTime);
       } catch (error: any) {
         console.error('Error fetching news:', error);
-        errorMessage.value = 'Failed to fetch news. Please try again later.';
+        errors.value = ['Failed to fetch news. Please try again later.'];
       } finally {
         loading.value = false;
       }
@@ -114,7 +124,7 @@ export default defineComponent({
       searchParams,
       articles,
       loading,
-      errorMessage,
+      errors,
       fetchNews,
       navigateToArticleDetail,
       responseInfo,

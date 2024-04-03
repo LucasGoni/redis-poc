@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/images/defaultImage.jpg">
+    <img alt="Clear Tech logo" src="./assets/images/clearTechLogo.jpeg" class="logo">
     <router-view />
   </div>
 </template>
@@ -21,5 +21,9 @@ export default defineComponent({
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.logo {
+  width: 700px; /* Set the desired width */
+  height: auto; /* Maintain aspect ratio */
 }
 </style>
